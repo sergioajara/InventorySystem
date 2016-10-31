@@ -1,11 +1,27 @@
-.outerHeader{
-	
+.navbar{
+	height: 90px;
 }
 
 .innerHeader{
-	
+
 }
 
 .outerBody{
-	
+
+}
+
+body {
+    padding-top: 120px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.login {
+	margin: 0 auto;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
 }
