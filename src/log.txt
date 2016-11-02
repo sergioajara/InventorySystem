@@ -1,0 +1,9 @@
+10/27/16
+  - Added form.html and based off index.html
+  - Created the form for creating a pdf file with input on form
+11/1/16
+  - Fixed folder structure to be similar to github.
+  - Fixed php showing error on browser
+  - Attached active directory to login page.
+11/2/16
+  - Fixed active directory

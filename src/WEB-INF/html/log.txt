@@ -1,3 +1,0 @@
-10/27/16
-  - Added form.html and based off index.html
-  - Created the form for creating a pdf file with input on form
