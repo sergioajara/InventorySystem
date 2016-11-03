@@ -51,53 +51,62 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
-    		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="CSITIS is a project started in Dr. Hussain's Software Engineering CSC 345/355 class.
                                       It is used for requesting hardware from the Kutztown University CS department."/>
 		<meta name="author" content="Sergio Jara, Cody Seyfert, Cassandra Guerrero, Christopher Stiles"/>
 
 		<!-- CSS Includes -->
-		<style>
-			@import url('https://fonts.googleapis.com/css?family=Roboto');
-		</style>
 		<link rel="stylesheet" href="/CSITIS/Resources/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/CSITIS/Resources/css/CSITIS_Style.css" />
 		<!-- /CSS Includes -->
+
 		<title>CS/IT Inventory System</title>
 	</head>
-	<body class="modal-open">
-  	<div class="innerHeader">
-  		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  			<div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/CSITIS">Computer Science Inventory</a>
-            <a class="nav-tabs" href="catalog.html">Catalog</a>
-            <a class="nav-tabs" href="form.html">Form</a>
-          </div>
-        </div>
-      </nav>
-    </div>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+  				<!-- Brand and toggle get grouped for better mobile display -->
+  				<div class="navbar-header">
+      					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          					<span class="sr-only">Toggle navigation</span>
+          					<span class="icon-bar"></span>
+          					<span class="icon-bar"></span>
+          					<span class="icon-bar"></span>
+      					</button>
+      					<a class="navbar-brand" href="/CSITIS">Computer Science Inventory</a>
+  				</div>
+  				<!-- Collect the nav links, forms, and other content for toggling -->
+  				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      					<ul class="nav navbar-nav">
+          					<li>
+		                      <a href="../html/catalog.html">All Categories</a>
+          					</li>
+                    <li>
+                          <a href="../html/form.html">Request Form</a>
+                    </li>
+      					</ul>
+  				</div>
+			</div>
+		</nav>
 
     <!-- Page Content -->
     <div class="container">
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
-      	  <div class="modal-dialog">
-            <div class="loginmodal-container">
-              <h1>Login to Your Account</h1><br>
-              <form>
-                <input type="text" name="user" placeholder="Username">
-                <input type="password" name="pass" placeholder="Password">
-                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-              </form>
-            </div>
-          </div>
-  			</div>
-		  </div>
-
-    </div>
-    <!-- /.container -->
-		<div class="outerBody"></div>
+		  <div class="modal" tabindex="-1">
+			  <div class="modal-dialog">
+		      <div class="loginContainer">
+		        <h1>Login to Your Account</h1>
+						<br/>
+		        <form>
+		          <input type="text" name="user" placeholder="Username">
+		          <input type="password" name="pass" placeholder="Password">
+		          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+		        </form>
+		      </div>
+		    </div>
+			</div>
+		</div>
 		<script type="text/javascript" src="/CSITIS/Resources/js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="/CSITIS/Resources/js/bootstrap.js"></script>
 	</body>
