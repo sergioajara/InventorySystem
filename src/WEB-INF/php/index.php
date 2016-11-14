@@ -84,7 +84,7 @@
 		                      <a href="../html/catalog.html">All Categories</a>
           					</li>
                     <li>
-                          <a href="../html/form.html">Request Form</a>
+                          <a href="../php/form.php">Request Form</a>
                     </li>
       					</ul>
   				</div>

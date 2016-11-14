@@ -2,8 +2,7 @@
 
 $connection;
 
-function db_connect()
-{
+function db_connect() {
    $DB_NAME = "CSITIS";
    $DB_HOST = "localhost";
    $DB_USER = "csitisadmin";
@@ -15,14 +14,21 @@ function db_connect()
       or die("Cannot connect to $DB_HOST as $DB_USER:" . mysql_error());
 
    mysql_select_db($DB_NAME) or die ("Cannot open $DB_NAME:" . mysql_error());
-}  // end function db_connect
+}
 
-
-// close connection to bookstore DB
-function db_close()
-{
+function db_close() {
    global $connection;
    mysql_close($connection);
-}  // end function db_close
+}
+
+function getForm() {
+  global $connection;
+
+  //check if the deviceID exists and decide type of form to output.
+  $sqlResult = $connection->query("SELECT `Device ID` FROM Apple WHERE Apple.`Device ID`==$_POST["deviceID"]");
+  if($sqlResult->num_rows > 0){
+    echo "Device found";
+  }
+}
 
 ?>

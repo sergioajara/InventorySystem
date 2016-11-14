@@ -12,6 +12,10 @@ body {
 	margin-top: 120px;
 }
 
+.nav_container {
+	margin-top: 30px;
+}
+
 .navbar{
 	height: 90px;
 	background-color: #782F40;
