@@ -59,12 +59,12 @@
 
         <!-- Projects Row -->
         <div class="row theForm">
-          <form action="getForm()" method="post">
+          <form action="dbconn.php" method="post">
             <div class="form-group">
              <label for="deviceID">Device ID:</label>
              <input type="text" class="form-control" id="deviceID" name="deviceID">
             </div>
-            <button type="submit" class="btn btn-default">Get Device</button>
+            <button type="submit" class="btn btn-default" name="deviceID_Submit">Get Device</button>
           </form>
         </div>
         <!-- /.row -->

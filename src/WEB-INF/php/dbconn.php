@@ -25,19 +25,21 @@ function getForm() {
   global $connection;
 
   //check if the deviceID exists and decide type of form to output.
-  $sqlResult = $connection->query("SELECT `Device ID` FROM `Apple`
-    UNION SELECT `Device ID` FROM `Arduino`
-    UNION SELECT `Device ID` FROM `Laptops`
-    UNION SELECT `Device ID` FROM `Misc`
-    UNION SELECT `Device ID` FROM `Nexus`
-    UNION SELECT `Device ID` FROM `Raspberry Pi`
-    UNION SELECT `Device ID` FROM `Stationary Equipment`");
-  if($sqlResult->num_rows > 0){
-    echo "Tables Device ID acquired.";
-    if($sqlResults){
-      echo "Device Found. Searched for $_POST['deviceID']"
-    }
-  }
+  $sql = "SELECT `Device ID` FROM `Apple` WHERE `Device ID`='APE'";
+  $result = $connection.mysql_query($sql);
+  //$sqlResult = $connection->$query();
+  echo $result;
+  // if($sqlResult->num_rows > 0){
+  //   echo "Tables Device ID acquired. ".$sqlResult;
+  //   if($sqlResults){
+  //     echo "Device Found. Searched for ".$_POST['deviceID'];
+  //   }
+  // }
+}
+
+if(isset($_POST['deviceID_Submit'])){
+  echo "Found deviceID_Submit.";
+  getForm();
 }
 
 ?>

@@ -148,7 +148,7 @@
 	        <!-- Image link - Links to category page -->
                 <a href="/CSITIS/WEB-INF/html/categories/miscellaneous.html">
 		    <!-- Image  -->
-                    <img class="img-responsive" src="/CSITIS/Resources/images/Missing.jpg" style="height:300px;" alt="">
+                    <img class="img-responsive" src="/CSITIS/Resources/images/Miscellaneous.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->

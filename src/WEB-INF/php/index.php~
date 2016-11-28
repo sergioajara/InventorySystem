@@ -1,9 +1,29 @@
+/*<?php
+date_default_timezone_set('America/New_York');
+//if(isset($_POST['user']) && isset($_POST['pass'])){
+  $ldap = ldap_connect("ldaps://.kutztown.edu") or die("Could not connect to LDAP server.");
+  $username = $_POST['user'];
+  $password = $_POST['pass'];
+  $ldaprdn = 'dc=students,dc=kutztown,dc=edu';
+
+  ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+  ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
+
+  if($bind = @ldap_bind($ldap, $ldaprdn, $password)){
+    $sr=ldap_search($ldap, $ldaprdn, "samaccountname=user");
+    $info = ldap_get_entries($ldap, $sr);                                                                                        
+    ldap_close($ldap);
+  } else{
+    //    error_log("LDAP bind unsuccessful", 3, "error.log");
+    }
+//}
+?>*/
+
 <?php
         date_default_timezone_set('America/New_York');
         // using ldap bind
-if(isset($_POST['user'])&&isset($_POST['pass'])){
-        $ldaprdn  = $_REQUEST['user'];
-        $ldappass = $_REQUEST['pass'];
+$ldaprdn  = $_POST['user'];//'wbtest@live.kutztown.edu';     // ldap rdn or dn
+$ldappass = $_POST['pass'];//'4.nobletruths';  // associated password
         // connect to ldap server
         $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu")
                         or die("Could not connect to LDAP server.");
@@ -45,7 +65,6 @@ if(isset($_POST['user'])&&isset($_POST['pass'])){
 
         //echo "Closing connection";
        ldap_close($ldapconn);
-}
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +96,17 @@ if(isset($_POST['user'])&&isset($_POST['pass'])){
           					<span class="icon-bar"></span>
       					</button>
       					<a class="navbar-brand" href="/CSITIS">Computer Science Inventory</a>
+  				</div>
+  				<!-- Collect the nav links, forms, and other content for toggling -->
+  				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      					<ul class="nav navbar-nav">
+          					<li>
+		                      <a href="../html/catalog.html">All Categories</a>
+          					</li>
+                    <li>
+                          <a href="../php/form.php">Request Form</a>
+                    </li>
+      					</ul>
   				</div>
 			</div>
 		</nav>
