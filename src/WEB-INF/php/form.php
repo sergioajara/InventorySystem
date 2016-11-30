@@ -1,6 +1,10 @@
 <?php
-	require 'dbconn.php';
-	db_connect();
+	session_start();
+	require("dbconn.php");
+
+	if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null) && (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == false || $_SESSION["isAdmin"] == null)){
+		//header('location: /CSITIS');
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +14,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="CSITIS is a project started in Dr. Huissain's Software Engineering CSC 345/355 class.
                                       Used for requesting hardware from the Kutztown University CS department.">
-		<meta name="author" content="Sergio Jara, Cody Seyfert, Cassandra Guerrero, Christopher Stiles">
+		<meta name="author" content="Cassandra Guerrero, Sergio Jara, Cody Seyfert, Christopher Stiles">
 
 		<!-- CSS Includes -->
 		<link rel="stylesheet" href="/CSITIS/Resources/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/CSITIS/Resources/css/CSITIS_Style.css" />
 		<!-- /CSS Includes -->
-		<title>CS/IT Inventory System</title>
+		<title>Admin: CSITIS Form</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -66,29 +70,6 @@
             </div>
             <button type="submit" class="btn btn-default" name="deviceID_Submit">Get Device</button>
           </form>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="../html/catalog.html">&laquo;</a>
-                    </li>
-                    <li>
-                        <a href="../html/catalog.html">1</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
         </div>
 		</div>
 		<script type="text/javascript" src="/CSITIS/Resources/js/jquery-3.1.1.min.js"></script>
