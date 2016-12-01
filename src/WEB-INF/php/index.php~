@@ -1,34 +1,17 @@
-/*<?php
-date_default_timezone_set('America/New_York');
-//if(isset($_POST['user']) && isset($_POST['pass'])){
-  $ldap = ldap_connect("ldaps://.kutztown.edu") or die("Could not connect to LDAP server.");
-  $username = $_POST['user'];
-  $password = $_POST['pass'];
-  $ldaprdn = 'dc=students,dc=kutztown,dc=edu';
-
-  ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
-  ldap_set_option($ldap, LDAP_OPT_REFERRALS, 0);
-
-  if($bind = @ldap_bind($ldap, $ldaprdn, $password)){
-    $sr=ldap_search($ldap, $ldaprdn, "samaccountname=user");
-    $info = ldap_get_entries($ldap, $sr);                                                                                        
-    ldap_close($ldap);
-  } else{
-    //    error_log("LDAP bind unsuccessful", 3, "error.log");
-    }
-//}
-?>*/
-
 <?php
-        date_default_timezone_set('America/New_York');
-        // using ldap bind
-$ldaprdn  = $_POST['user'];//'wbtest@live.kutztown.edu';     // ldap rdn or dn
-$ldappass = $_POST['pass'];//'4.nobletruths';  // associated password
+  // if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null) && (!isset($_SESSION["isAdmin" ]) || $_SESSION["isAdmin"] == false || $_SESSION["isAdmin"] == null)){
+  //header('location: /CSITIS');
+
+  date_default_timezone_set('America/New_York');
+  // using ldap bind
+  if(isset($_POST['user'])&&isset($_POST['pass'])){
+        $ldaprdn  = $_REQUEST['user'];
+        $ldappass = $_REQUEST['pass'];
         // connect to ldap server
         $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu")
                         or die("Could not connect to LDAP server.");
 
-        ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+       ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
        ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
         if ($ldapconn) {
@@ -45,26 +28,19 @@ $ldappass = $_POST['pass'];//'4.nobletruths';  // associated password
 
         }
 
-        //echo "Searching for (samaccountname=sjara163) ... <br />";
         // Search surname entry
-       $sr=ldap_search($ldapconn, "dc=students,dc=kutztown, dc=edu", "samaccountname=sjara163") or die("Could \
+       $sr=ldap_search($ldapconn, "dc=students,dc=kutztown, dc=edu", "samaccountname=user") or die("Could \
    not search");
-        //echo "Search result is " . $sr . "<br />";
-
-       //echo "Number of entries returned is " . ldap_count_entries($ldapconn, $sr) . "<br />";
-
-        //echo "Getting entries ...<p>";
        $info = ldap_get_entries($ldapconn, $sr);
-       //echo "Data for " . $info["count"] . " items returned:<p>";
 
-        for ($i=0; $i<$info["count"]; $i++) {
+       //        for ($i=0; $i<$info["count"]; $i++) {
                         //echo "dn is: " . $info[$i]["dn"] . "<br />";
                         //echo "first cn entry is: " . $info[$i]["cn"][0] . "<br />";
                         //echo "first email entry is: " . $info[$i]["mail"][0] . "<br /><hr />";
-        }
+       //}
 
-        //echo "Closing connection";
        ldap_close($ldapconn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,17 +72,6 @@ $ldappass = $_POST['pass'];//'4.nobletruths';  // associated password
           					<span class="icon-bar"></span>
       					</button>
       					<a class="navbar-brand" href="/CSITIS">Computer Science Inventory</a>
-  				</div>
-  				<!-- Collect the nav links, forms, and other content for toggling -->
-  				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      					<ul class="nav navbar-nav">
-          					<li>
-		                      <a href="../html/catalog.html">All Categories</a>
-          					</li>
-                    <li>
-                          <a href="../php/form.php">Request Form</a>
-                    </li>
-      					</ul>
   				</div>
 			</div>
 		</nav>

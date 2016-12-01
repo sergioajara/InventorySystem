@@ -1,51 +1,6 @@
 <?php
-        date_default_timezone_set('America/New_York');
-        // using ldap bind
-if(isset($_POST['user'])&&isset($_POST['pass'])){
-        $ldaprdn  = $_REQUEST['user'];
-        $ldappass = $_REQUEST['pass'];
-        // connect to ldap server
-        $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu")
-                        or die("Could not connect to LDAP server.");
-
-        ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-       ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
-
-        if ($ldapconn) {
-
-                        // binding to ldap server
-                        $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
-
-                        // verify binding
-                        if ($ldapbind) {
-                                        //echo "LDAP bind successful...</br>";
-                        } else {
-                                       //echo "LDAP bind failed...";
-                        }
-
-        }
-
-        //echo "Searching for (samaccountname=sjara163) ... <br />";
-        // Search surname entry
-       $sr=ldap_search($ldapconn, "dc=students,dc=kutztown, dc=edu", "samaccountname=sjara163") or die("Could \
-   not search");
-        //echo "Search result is " . $sr . "<br />";
-
-       //echo "Number of entries returned is " . ldap_count_entries($ldapconn, $sr) . "<br />";
-
-        //echo "Getting entries ...<p>";
-       $info = ldap_get_entries($ldapconn, $sr);
-       //echo "Data for " . $info["count"] . " items returned:<p>";
-
-        for ($i=0; $i<$info["count"]; $i++) {
-                        //echo "dn is: " . $info[$i]["dn"] . "<br />";
-                        //echo "first cn entry is: " . $info[$i]["cn"][0] . "<br />";
-                        //echo "first email entry is: " . $info[$i]["mail"][0] . "<br /><hr />";
-        }
-
-        //echo "Closing connection";
-       ldap_close($ldapconn);
-}
+  require_once("dbconn.php");
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +43,7 @@ if(isset($_POST['user'])&&isset($_POST['pass'])){
 		      <div class="loginContainer">
 		        <h1>Login to Your Account</h1>
 						<br/>
-		        <form action="../html/catalog.html" method="POST">
+		        <form action="index.php" method="POST">
 		          <input type="text" name="user" placeholder="Username" required>
 		          <input type="password" name="pass" placeholder="Password" required>
 		          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
@@ -101,3 +56,36 @@ if(isset($_POST['user'])&&isset($_POST['pass'])){
 		<script type="text/javascript" src="/CSITIS/Resources/js/bootstrap.js"></script>
 	</body>
 </html>
+<?php
+
+  date_default_timezone_set('America/New_York');
+
+  // using ldap bind
+  if(isset($_POST['user']) && isset($_POST['pass'])){
+    $ldaprdn = $_REQUEST['user'];
+    $ldappass = $_REQUEST['pass'];
+
+    $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu")
+                or die("Could not connect to LDAP server.");
+
+    ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
+    if ($ldapconn)
+      $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
+
+    $sr = ldap_search($ldapconn, "dc=students,dc=kutztown,dc=edu", "samaccountname=".$ldaprdn) or die("Could not find username.");
+    $info = ldap_get_entries($ldadpconn, $sr);
+
+    if ($info["count"]>=1){
+       $data = ldap_get_dn($ldapconn, $info);
+       ldap_bind($ldapconn, $ldaprdn, $ldappass);
+    }
+
+    ldap_close($ldapconn);
+  }
+  else {
+    $user = NULL;
+    $password = NULL;
+  }
+?>
