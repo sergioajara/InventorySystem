@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+ 
+if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null)) {
+  header('location: /CSITIS');
+}
+
+?>
+
+ $user = cseyf952@live.kutztown.edu;
+ $msg = 'test';
+ $headers = 'From: $user';
+
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -34,8 +49,9 @@
                 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     					<ul class="nav navbar-nav">
                         					<li>
-								  <a href="../catalog.html">All Categories</a>
+																				<a href="../catalog.php">All Categories</a>
                         					</li>
+
                     					</ul>
                 				</div>
                 				<!-- /.navbar-collapse -->
@@ -58,71 +74,21 @@
         </div>
         <!-- /.row -->
 
-        <!-- Projects Row - Items 1-3 -->
+        <!-- Projects Row (Item 1) -->
         <div class="row">
-			<!-- Item 1 - MacBook 15.4 Inch -->
-            <div class="col-md-4 portfolio-item">
-				<!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/MacBook.jpg" style="height:300px;" alt="">
-                <h3>
-					<!-- Item name and Request button -->
-                    MacBook - 15.4 Inch <button type="button" class="btn btn-primary">Request</button>
-                </h3>
-				<!-- Description -->
-                <p>A MacBook Pro with a 15.4 inch display</p>
-            </div>
-	    
-			<!-- Item 2  - Macbook 17.0 Inch -->
-            <div class="col-md-4 portfolio-item">
-				<!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/MacBook.jpg" style="height:300px;"  alt="">
-                <h3>
-					<!-- Item name and request button -->
-                    MacBook - 17.0 Inch <button type="button" class="btn btn-primary">Request</button>
-                </h3>
-				<!-- Description -->
-                <p>A MacBook Pro with a 17.0 inch display</p>
-            </div>
 
-			<!-- Item 3 - Airport Extreme -->
+	    <!-- Item 1 - Asus Nexus 7 -->
             <div class="col-md-4 portfolio-item">
-				<!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/AirportExtreme.jpg" style="height:300px;"  alt="">
+	        <!-- Image -->
+                <img class="img-responsive" src="/CSITIS/Resources/images/Nexus.jpg" style="height:300px;" alt="">
                 <h3>
-					<!-- Item name and request button -->
-                    AirPort Extreme 802.11ac <button type="button" class="btn btn-primary">Request</button>
+		    <!-- Item name and request button -->
+   Asus Nexus 7 <form action="mail($user,$msg,$headers)"><button type="submit" class="btn btn-primary">Request</button></form>
                 </h3>
-				<!-- Description -->
-                <p>A MacBook Pro with a 15.4 inch display</p>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row (items 4-5) -->
-        <div class="row">
-			<!-- Item 4 - iPad -->
-            <div class="col-md-4 portfolio-item">
-				<!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/iPad.jpg" style="height:300px;" alt="">
-                <h3>
-					<!-- Item name and request button -->
-                    iPad <button type="button" class="btn btn-primary">Request</button>
-                </h3>
-				<!-- Description -->
+		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
             </div>
 
-			<!-- Item 5 - iPod Touch -->
-            <div class="col-md-4 portfolio-item">
-				<!-- Image -->
-				<img class="img-responsive" src="/CSITIS/Resources/images/iPodTouch.jpg" style="height:300px;" alt="">
-				<h3>
-					<!-- Item name and request button -->
-                    iPod Touch <button type="button" class="btn btn-primary">Request</button>
-                </h3>
-				<!-- Description -->
-                <p><!-- Description goes here, if needed --></p>
-            </div>
         </div>
         <!-- /.row -->
 
@@ -144,4 +110,7 @@
 
 		<script type="text/javascript" src="Resources/js/bootstrap.js"></script>
 	</body>
+
+?>
+
 </html>

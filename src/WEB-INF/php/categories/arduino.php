@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<?php
+session_start();
+ 
+if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null)) {
+  header('location: /CSITIS');
+}
+ ?>
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -34,7 +43,7 @@
                 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     					<ul class="nav navbar-nav">
                         					<li>
-								  <a href="../catalog.html">All Categories</a>
+												<a href="../catalog.html">All Categories</a>
                         					</li>
                     					</ul>
                 				</div>
@@ -58,46 +67,63 @@
         </div>
         <!-- /.row -->
 
-        <!-- Projects Row - Items 1-3 -->
+        <!-- Projects Row - Items 1-3-->
         <div class="row">
-
-	    <!-- Item 1 - Lenovo Thinkpad L420 -->
-            <div class="col-md-4 portfolio-item">
-	        <!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/Laptop.jpg" style="height:300px;" alt="">
-                <h3>
-		    <!-- Item name and request button -->
-                    Lenovo Thinkpad L420 <button type="button" class="btn btn-primary">Request</button>
-                </h3>
-		<!-- Description -->
-                <p><!-- Description goes here, if needed --></p>
-            </div>
-
-	    <!-- Item 2 - Lenovo Thinkpad L460 -->
+	    <!-- Item 1 - Clear Case -->
             <div class="col-md-4 portfolio-item">
 		<!-- Image -->
-                <img class="img-responsive" src="/CSITIS/Resources/images/Laptop.jpg" style="height:300px;" alt="">
+                <img class="img-responsive" src="/CSITIS/Resources/images/Missing.jpg" style="height:300px;" alt="">
                 <h3>
-		    <!-- Item name and request button -->
-                    Lenovo Thinkpad L460 <button type="button" class="btn btn-primary">Request</button>
+		    <!-- Item name and Request button -->
+                    Clear Case <button type="button" class="btn btn-primary">Request</button>
                 </h3>
 		<!-- Description -->
-                <p><!-- Description goes here, if needed --></p>
+                <p>A transparent acrylic case to protect the internal components of your Arduino system.</p>
+            </div>
+			
+	    <!-- Item 2 - Ethernet Shield -->
+            <div class="col-md-4 portfolio-item">
+		<!-- Image -->
+                <img class="img-responsive" src="/CSITIS/Resources/images/Missing.jpg" style="height:300px;"  alt="">
+                <h3>
+		    <!-- Item name and Request button -->
+                    Ethernet Shield <button type="button" class="btn btn-primary">Request</button>
+                </h3>
+		<!-- Description -->
+                <p>Allows your Arduino system to connect to the Internet via Ethernet connection.</p>
+            </div>
+			
+	    <!-- Item 3 - Numberpad -->
+            <div class="col-md-4 portfolio-item">
+		<!-- Image -->
+                <img class="img-responsive" src="/CSITIS/Resources/images/Missing.jpg" style="height:300px;"  alt="">
+                <h3>
+		    <!-- Item name and Request button -->
+                    Numberpad <button type="button" class="btn btn-primary">Request</button>
+                </h3>
+		<!-- Description -->
+                <p>A numberpad for basic number input into your Arduino system.</p>
             </div>
 
-	    <!-- Item 3 - Lenovo Thinkpad L510 -->
-	    <div class="col-md-4 portfolio-item">
-                <img class="img-responsive" src="/CSITIS/Resources/images/Laptop.jpg" style="height:300px;" alt="">
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row - Item 4 -->
+        <div class="row">
+
+	    <!-- Item 4 - UNO SMD -->
+            <div class="col-md-4 portfolio-item">
+		<!-- Image -->
+                <img class="img-responsive" src="/CSITIS/Resources/images/Arduino.jpg" style="height:300px;" alt="">
                 <h3>
-		    <!-- Item name and request button -->
-                    Lenovo Thinkpad L510 <button type="button" class="btn btn-primary">Request</button>
+		    <!-- Item name and Request button -->
+                    UNO SMD <button type="button" class="btn btn-primary">Request</button>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
             </div>
 
         </div>
-        <!-- /.row -->
 
         <hr>
 

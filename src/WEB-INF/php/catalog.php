@@ -1,6 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
+<?php
+   session_start();
+ 
+if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null)) {
+  header('location: /CSITIS');
+}
+
+ ?>
+
 	<head>
 		<meta charset="utf-8"/>
     		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +44,7 @@
                 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     					<ul class="nav navbar-nav">
                         					<li>
-								  <a href="../html/catalog.html">All Categories</a>
+								  <a href="../php/catalog.php">All Categories</a>
                         					</li>
 								
                     					</ul>
@@ -66,13 +75,13 @@
 	    <!-- Category 1 - Apple Products -->
             <div class="col-md-4 portfolio-item">
 	        <!-- Image link - Links to category page -->
-	        <a href="/CSITIS/WEB-INF/html/categories/apple.html">
+	        <a href="/CSITIS/WEB-INF/php/categories/apple.php">
 		<!-- Image -->
                 <img class="img-responsive" src="/CSITIS/Resources/images/Apple.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->
-                    <a href="/CSITIS/WEB-INF/html/categories/apple.html">Apple Devices</a>
+                    <a href="/CSITIS/WEB-INF/php/categories/apple.php">Apple Devices</a>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
@@ -81,13 +90,13 @@
 	    <!-- Category 2 - Arduino -->
 	    <div class="col-md-4 portfolio-item">
 	        <!-- Image link - Links to category page -->
-                <a href="/CSITIS/WEB-INF/html/categories/arduino.html">
+                <a href="/CSITIS/WEB-INF/php/categories/arduino.php">
 		    <!-- Image  -->
                     <img class="img-responsive" src="/CSITIS/Resources/images/Arduino.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->
-                    <a href="/CSITIS/WEB-INF/html/categories/arduino.html">Arduino</a>
+                    <a href="/CSITIS/WEB-INF/php/categories/arduino.php">Arduino</a>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
@@ -96,13 +105,13 @@
 	    <!-- Category 3 - Raspberry Pi -->
             <div class="col-md-4 portfolio-item">
 	        <!-- Image link - Links to category page -->
-                <a href="/CSITIS/WEB-INF/html/categories/raspberrypi.html">
+                <a href="/CSITIS/WEB-INF/php/categories/raspberrypi.php">
 		    <!-- Image  -->
                     <img class="img-responsive" src="/CSITIS/Resources/images/RaspberryPi.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->
-                    <a href="/CSITIS/WEB-INF/html/categories/raspberrypi.html">Raspberry Pi</a>
+                    <a href="/CSITIS/WEB-INF/php/categories/raspberrypi.php">Raspberry Pi</a>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
@@ -131,13 +140,13 @@
 	    <!-- Category 5 - Laptops -->
 	    <div class="col-md-4 portfolio-item">
 	        <!-- Image link - Links to category page -->
-                <a href="/CSITIS/WEB-INF/html/categories/laptop.html">
+                <a href="/CSITIS/WEB-INF/php/categories/laptop.php">
 		    <!-- Image  -->
                     <img class="img-responsive" src="/CSITIS/Resources/images/Laptop.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->
-                    <a href="/CSITIS/WEB-INF/html/categories/laptop.html">Laptops</a>
+                    <a href="/CSITIS/WEB-INF/php/categories/laptop.php">Laptops</a>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>
@@ -146,13 +155,13 @@
 	    <!-- Category 6 - Miscellaneous -->
 	    <div class="col-md-4 portfolio-item">
 	        <!-- Image link - Links to category page -->
-                <a href="/CSITIS/WEB-INF/html/categories/miscellaneous.html">
+                <a href="/CSITIS/WEB-INF/php/categories/miscellaneous.php">
 		    <!-- Image  -->
                     <img class="img-responsive" src="/CSITIS/Resources/images/Missing.jpg" style="height:300px;" alt="">
                 </a>
                 <h3>
 		    <!-- Link to full category page -->
-                    <a href="/CSITIS/WEB-INF/html/categories/miscellaneous.html">Miscellaneous</a>
+                    <a href="/CSITIS/WEB-INF/php/categories/miscellaneous.php">Miscellaneous</a>
                 </h3>
 		<!-- Description -->
                 <p><!-- Description goes here, if needed --></p>

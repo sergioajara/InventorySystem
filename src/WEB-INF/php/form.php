@@ -5,6 +5,11 @@
 	if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null) && (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == false || $_SESSION["isAdmin"] == null)){
 		//header('location: /CSITIS');
 	}
+
+	if(isset($_SESSION['username']))
+		$username = $_SESSION['username'];
+	else
+		$username = NULL;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,5 +82,6 @@
 	</body>
 </html>
 <?php
+	
 	db_close();
 ?>
