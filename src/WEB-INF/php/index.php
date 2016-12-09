@@ -2,107 +2,9 @@
   //Author: Cassandra Guerrero, edited from Chris Walck
   //Start user session, get a username and password from the text fields
   session_start();
-
-  //Doing this so we have variables set to something.
-  //Else we may run into issues later with garbage.
-  if(isset($_POST['user'])){
-    $username=$_POST['user'];
-  }
-  else{
-    $username = NULL;
-  }
-  if(isset($_POST['pass'])){
-    $password=$_POST['pass'];
-  }
-  else{
-   $password = NULL;
-  }
-  if(isset($_SESSION['isLoggedIn'])){
-   $isLoggedIn = $_SESSION['isLoggedIn'];
-  }
-  else{
-   $isLoggedIn = false;
-  }
-  if(isset($_SESSION['isAdmin'])){
-   $isAdmin = $_SESSION['isAdmin'];
-  }
-  else{
-   $isAdmin = false;
-  }
-  if(isset($_SESSION['failedLogin'])){
-   $failedLogin = $_SESSION['failedLogin'];
-  }
-  else{
-   $failedLogin = false;
-  }
-  $adminNames = array("frye@kutztown.edu", "sutjak@kutztown.edu", "sjara163@live.kutztown.edu");
-
-  //Check if the user is already logged in. This conserves resources by not
-  //having to execute all the php.
-  // if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
-  //  $_SESSION['sessionUsername'] = $username;
-  //  //header('Location: adminLanding.php');
-  //  echo 'Already logged in as admin. adminLanding.php';
-  // }
-  // else if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == false){
-  //  $_SESSION['sessionUsername'] = $username;
-  //  //header('Location: catalog.php');
-  //  echo 'Already logged in. catalog.php';
-  // }
-
-  //If there is a username and password
-  if(/*Check that POST['submit'] is set, SESSION loggedIn is either not set or
-      it's false and username and pass are not null. If you do that then you
-      don't have to check if user and pass are set.*/
-    isset($_POST['login']) && (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false) && !is_null($username) && !is_null($password)){
-    //Connect to login directory
-    $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu");
-    $ldapbind;
-
-    ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-    ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
-
-    if($ldapconn)
-      $ldapbind = ldap_bind($ldapconn, $username,  $password);
-    //search for username in login directory
-    if($ldapbind){
-      $_SESSION["isLoggedIn"] = true;
-      $_SESSION["failedLogin"] = false;
-      $_SESSION["sessionUsername"] = $username; //Might change depending on what we get from $info
-      //I have a feeling an admin isn't going to work for this.
-      //Would Dr. Frye's login work for this if we have dc=students?
-      $sr = ldap_search($ldapconn, "dc=students,dc=kutztown,dc=edu", "samaccountname=".$username) or die("Could not find username.");
-      $info = ldap_get_entries($ldapconn, $sr);
-
-      //Should display all the data. Lets see what it is.
-      echo '<script type=\"text/javascript\">console.log($info);</script>';
-      print_r($info);
-
-      //Iterate throught the array and check it. Not sure how. For loop?
-      if(in_array($username, $adminNames)){//if the user is an admin
-        $_SESSION["isAdmin"] = true;
-        ldap_close($ldap);
-        echo 'adminLanding.php';
-        header("Location: adminLanding.php");
-      }
-      else{
-        //Exit the directory and redirect the user to the catalog
-        ldap_close($ldap);
-        header("Location: catalog.php");
-      }
-    }
-    else{
-      //the username was not found and the user will be returned to the login page
-      $_SESSION["failedLogin"] = true;
-      echo("$(document).ready(function(){
-        console.log('Failed to login. Invalid credentials. Refresh page.');
-      }");
-      header("Location: index.php");
-    }
-}
 ?>
 <!DOCTYPE html>
-      <!--Author:Sergio Jara-->
+<!--Author:Sergio Jara-->
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
@@ -164,9 +66,108 @@
       //End If failedLogin is true
 
       //My attempt (Sergio)
-      if(<?php echo $failedLogin; ?> == "true")
-        $('div#failedLoginAlert').unhide();
-        alert("Login failed. Try again.");
+      // if((<//?php echo(!is_null($_SESSION['failedLogin'])); ?> == "true") && (<//?php echo($_SESSION['failedLogin']); ?> == "true")){
+      //   $(' #failedLoginAlert').unhide();
+      //   alert("Login failed. Try again.");
+      // }
     </script>
 	</body>
 </html>
+<?php
+  //Doing this so we have variables set to something.
+  //Else we may run into issues later with garbage.
+  if(isset($_POST['user'])){
+    $username=$_POST['user'];
+  }
+  else{
+    $username = NULL;
+  }
+  if(isset($_POST['pass'])){
+    $password=$_POST['pass'];
+  }
+  else{
+   $password = NULL;
+  }
+  if(isset($_SESSION['isLoggedIn'])){
+   $isLoggedIn = $_SESSION['isLoggedIn'];
+  }
+  else{
+   $isLoggedIn = false;
+  }
+  if(isset($_SESSION['isAdmin'])){
+   $isAdmin = $_SESSION['isAdmin'];
+  }
+  else{
+   $isAdmin = false;
+  }
+  if(isset($_SESSION['failedLogin'])){
+   $failedLogin = $_SESSION['failedLogin'];
+  }
+  else{
+   $failedLogin = false;
+  }
+  $adminNames = array("frye@kutztown.edu", "sutjak@kutztown.edu", "sjara163@live.kutztown.edu");
+
+  //Check if the user is already logged in. This conserves resources by not
+  //having to execute all the php.
+  // if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
+  //  $_SESSION['sessionUsername'] = $username;
+  //  //header('Location: adminLanding.php');
+  //  echo 'Already logged in as admin. adminLanding.php';
+  // }
+  // else if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == false){
+  //  $_SESSION['sessionUsername'] = $username;
+  //  //header('Location: catalog.php');
+  //  echo 'Already logged in. catalog.php';
+  // }
+
+  //error_log("[index.php] INFO - Username: ".$username."\nPassword: ".$password, 3, "./logs/debug.log");
+
+  //If there is a username and password
+  if(/*Check that POST['submit'] is set, SESSION loggedIn is either not set or
+      it's false and username and pass are not null. If you do that then you
+      don't have to check if user and pass are set.*/
+    isset($_POST['login']) && (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false) && !is_null($username) && !is_null($password)){
+    //Connect to login directory
+    $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu");
+    $ldapbind;
+
+    ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
+    if($ldapconn)
+      $ldapbind = ldap_bind($ldapconn, $username,  $password);
+    //search for username in login directory
+    if($ldapbind){
+      $_SESSION["isLoggedIn"] = true;
+      $_SESSION["failedLogin"] = false;
+      $_SESSION["sessionUsername"] = $username;
+
+      $sr = ldap_search($ldapconn, "dc=students,dc=kutztown,dc=edu", "samaccountname=".$username) or die("Could not find username.");
+      $info = ldap_get_entries($ldapconn, $sr);
+
+      //Should display all the data. Lets see what it is.
+      //error_log("[index.php] INFO - ".$info, 3, "./logs/debug.log");
+
+      //This looks for username in adminNames array
+      if(in_array($username, $adminNames)){//if the user is an admin
+        $_SESSION["isAdmin"] = true;
+        ldap_close($ldap);
+        //error_log("[index.php] INFO - User is an admin and successfully logged in. Redirect to adminLanding.php", 3, "./logs/debug.log");
+        header("Location: adminLanding.php");
+      }
+      else{
+        //Exit the directory and redirect the user to the catalog
+        ldap_close($ldap);
+        //error_log("[index.php] INFO - User is not an admin and has successfully logged in. Redirect to catalog.php", 3, "./logs/debug.log");
+        header("Location: catalog.php");
+      }
+    }
+    else{
+      //the username was not found and the user will be returned to the login page
+      $_SESSION["failedLogin"] = true;
+      //error_log("[index.php] ERROR - Login failed redirect to index.php", 3, "logs/debug.log");
+      header("Location: index.php");
+    }
+}
+?>
