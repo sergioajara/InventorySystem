@@ -60,22 +60,9 @@
 		</div>
 		<script type="text/javascript" src="/CSITIS/Resources/js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="/CSITIS/Resources/js/bootstrap.js"></script>
-    <script type="text/javascript">
-      //if failedLogin is true
-      //then unhide the alert banner ontop of user input.
-      //End If failedLogin is true
-
-      //My attempt (Sergio)
-      // if((<//?php echo(!is_null($_SESSION['failedLogin'])); ?> == "true") && (<//?php echo($_SESSION['failedLogin']); ?> == "true")){
-      //   $(' #failedLoginAlert').unhide();
-      //   alert("Login failed. Try again.");
-      // }
-    </script>
 	</body>
 </html>
 <?php
-  //Doing this so we have variables set to something.
-  //Else we may run into issues later with garbage.
   if(isset($_POST['user'])){
     $username=$_POST['user'];
   }
@@ -108,26 +95,21 @@
   }
   $adminNames = array("frye@kutztown.edu", "sutjak@kutztown.edu", "sjara163@live.kutztown.edu");
 
-  //Check if the user is already logged in. This conserves resources by not
-  //having to execute all the php.
-  // if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
-  //  $_SESSION['sessionUsername'] = $username;
-  //  //header('Location: adminLanding.php');
-  //  echo 'Already logged in as admin. adminLanding.php';
-  // }
-  // else if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == false){
-  //  $_SESSION['sessionUsername'] = $username;
-  //  //header('Location: catalog.php');
-  //  echo 'Already logged in. catalog.php';
-  // }
+  if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true){
+   $_SESSION['sessionUsername'] = $username;
+   //header('Location: adminLanding.php');
+   echo 'Already logged in as admin. adminLanding.php';
+  }
+  else if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn'] == true && isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == false){
+   $_SESSION['sessionUsername'] = $username;
+   //header('Location: catalog.php');
+   echo 'Already logged in. catalog.php';
+  }
 
   //error_log("[index.php] INFO - Username: ".$username."\nPassword: ".$password, 3, "./logs/debug.log");
 
   //If there is a username and password
-  if(/*Check that POST['submit'] is set, SESSION loggedIn is either not set or
-      it's false and username and pass are not null. If you do that then you
-      don't have to check if user and pass are set.*/
-    isset($_POST['login']) && (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false) && !is_null($username) && !is_null($password)){
+  if(isset($_POST['login']) && (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] == false) && !is_null($username) && !is_null($password)){
     //Connect to login directory
     $ldapconn = ldap_connect("ldaps://ldap.kutztown.edu");
     $ldapbind;

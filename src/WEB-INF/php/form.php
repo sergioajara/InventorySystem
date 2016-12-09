@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	require("dbconn.php");
 
 	if((!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] == false || $_SESSION["isLoggedIn"] == null) && (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == false || $_SESSION["isAdmin"] == null)){
 		//header('location: /CSITIS');
@@ -68,7 +67,7 @@
 
         <!-- Projects Row -->
         <div class="row theForm">
-          <form action="dbconn.php" method="post">
+          <form action="form.php" method="post">
             <div class="form-group">
              <label for="deviceID">Device ID:</label>
              <input type="text" class="form-control" id="deviceID" name="deviceID">
@@ -82,48 +81,21 @@
 	</body>
 </html>
 <?php
-	class DB{
-	  var $DB_HOST = "localhost";
-	  var $DB_NAME = "CSITIS";
-	  var $DB_USER = "csitisadmin";
-	  var $DB_PASS = "nuwREBu2";
-	  var $LINK_RESULT = 0;
-	  var $QUERY_RESULT = 0;
-	  var $CURRENT_RECORD = array();
-	  var $CURRENT_ROW;
-	  var $ERROR = "";
-	  var $ERROR_STATE = 0;
+	$connection = mysqli_connect( "localhost", "csitisadmin", "nuwREBu2", "CSITIS") or die("Could not connect to the CSITIS database.");
 
-	  function db_connect() {
-
-	    if($this->$LINK_RESULT == 0){
-	      $LINK_RESULT = mysqli_connect( $DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-	    }
-
-	    if(!$LINK_RESULT){
-	     echo('Failed to connect to MySQL: ' . mysqli_connect_error());
-	    }
-
-	    echo $connection->host_info . "\n";
-	  }
+	if(isset($_POST['deviceID_Submit'])){
+		$query = "SELECT * FROM Apple WHERE `Device ID`='".$_POST['deviceID']."'";
+		$result = mysqli_query($connection, $query);
+		// while($row = mysqli_fetch_array($result)){
+		// 	echo $row['Device ID'];
+		// }
+		print_r($result);
 	}
 
-	global $connection;
-
-
-
-	function db_close() {
-	  global $connection;
-	  mysqli_close($connection);
-	}
-
-	function getForm() {
-	  global $connection;
+	function getForm($userName, $firstName, $lastName, $KUID, $deviceID) {
 	  //check if the deviceID exists and decide type of form to output.
-	  $query = "SELECT `Device ID` FROM `Apple` WHERE `Device ID`='APE'";
-	  $result = mysqli_query($connection, $query);
-	  //$sqlResult = $connection->$query();
-	  echo $result;
+
+
 	  // if($sqlResult->num_rows > 0){
 	  //   echo "Tables Device ID acquired. ".$sqlResult;
 	  //   if($sqlResults){
@@ -132,10 +104,5 @@
 	  // }
 	}
 
-	if(isset($_POST['deviceID_Submit'])){
-	  echo "Found deviceID_Submit.";
-	  getForm();
-	}
-
-	db_close();
+	//mysqli_close($connection);
 ?>
