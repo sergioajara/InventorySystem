@@ -85,10 +85,16 @@
 
 	if(isset($_POST['deviceID_Submit'])){
 		$query = "SELECT * FROM Apple WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query2 = "SELECT * FROM Arduino WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query3 = "SELECT * FROM Laptops WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query4 = "SELECT * FROM Misc WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query5 = "SELECT * FROM Nexus WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query6 = "SELECT * FROM `Raspberry Pi` WHERE `Device ID`='".$_POST['deviceID']."'";
+		$query7 = "SELECT * FROM `Stationary Equipment` WHERE `Device ID`='".$_POST['deviceID']."'";
+
 		$result = mysqli_query($connection, $query);
-		// while($row = mysqli_fetch_array($result)){
-		// 	echo $row['Device ID'];
-		// }
+		if()
+
 		print_r($result);
 	}
 
